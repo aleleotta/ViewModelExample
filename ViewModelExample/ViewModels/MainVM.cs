@@ -13,14 +13,21 @@ namespace ViewModelExample.ViewModels
     {
         #region Attributes
         private DelegateCommand clickButton;
-        private int clickNum;
+        private Button button;
+        private int clickCount;
         #endregion
 
         #region Properties
         public DelegateCommand ClickButton { get { return clickButton; }}
+        public Button Button { get { return button; } }
         public void click_execute()
         {
-            clickNum++;
+            clickCount++;
+            if (clickCount == 1)
+                button.Text = $"Clicked {clickCount} time";
+            else
+                button.Text = $"Clicked {clickCount} times";
+
         }
         #endregion
 
@@ -28,6 +35,8 @@ namespace ViewModelExample.ViewModels
         public MainVM()
         {
             DelegateCommand clickButton = new DelegateCommand(click_execute);
+            button = new Button();
+            button.Text = "Click me!";
         }
         #endregion
 

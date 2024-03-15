@@ -10,9 +10,9 @@
             VerticalOptions="Center">
 
             <Button
-                Text="Click me"
-                Clicked="OnCounterClicked"
-                HorizontalOptions="Center" />
+                Text="{Binding button}"
+                Command="{Binding ClickButton}"
+                HorizontalOptions="Center"/>
 
         </VerticalStackLayout>
     </ScrollView>
