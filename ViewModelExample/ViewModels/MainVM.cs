@@ -12,17 +12,17 @@ namespace ViewModelExample.ViewModels
     internal class MainVM : INotifyPropertyChanged
     {
         #region Attributes
-        private DelegateCommand clickButton;
-        private string buttonText;
+        private DelegateCommand contadorCommand;
+        private string buttonText = "Click me!";
         private int clickCount = 0;
         #endregion
 
         #region Properties
-        public DelegateCommand ClickButton
+        public DelegateCommand ContadorCommand
         {
             get
             {
-                return clickButton;
+                return contadorCommand;
             }
         }
         public string ButtonText
@@ -32,7 +32,7 @@ namespace ViewModelExample.ViewModels
                 return buttonText;
             }
         }
-        private void click_execute()
+        private void contadorCommand_execute()
         {
             clickCount++;
             if (clickCount == 1)
@@ -46,9 +46,7 @@ namespace ViewModelExample.ViewModels
         #region Constructor
         public MainVM()
         {
-            DelegateCommand clickButton = new DelegateCommand(click_execute);
-            buttonText = "Click Me!";
-            NotifyPropertyChanged("ButtonText");
+            contadorCommand = new DelegateCommand(contadorCommand_execute);
         }
         #endregion
 
@@ -58,7 +56,7 @@ namespace ViewModelExample.ViewModels
         #region ViewModel
         public event PropertyChangedEventHandler PropertyChanged;
         /// <summary>
-        /// 
+        /// Notifies a view that a specific property has been changed.
         /// </summary>
         /// <param name="propertyName">The name of the changed property</param>
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")

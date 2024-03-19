@@ -1,6 +1,4 @@
-﻿using ViewModelExample.ViewModels;
-
-namespace ViewModelExample.Views;
+﻿namespace ViewModelExample.Views;
 
 public partial class MainPage : ContentPage
 {
@@ -8,7 +6,6 @@ public partial class MainPage : ContentPage
     public MainPage()
     {
         InitializeComponent();
-        MainVM vm = new MainVM();
     }
 
 }
