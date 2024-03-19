@@ -12,19 +12,25 @@ namespace ViewModelExample.ViewModels
     internal class MainVM : INotifyPropertyChanged
     {
         #region Attributes
-        private DelegateCommand contadorCommand;
+        private DelegateCommand counterCommand;
         private string buttonText = "Click me!";
         private int clickCount = 0;
         #endregion
 
         #region Properties
+        /// <summary>
+        /// Returns the command to whatever button it is assigned to.
+        /// </summary>
         public DelegateCommand ContadorCommand
         {
             get
             {
-                return contadorCommand;
+                return counterCommand;
             }
         }
+        /// <summary>
+        /// Returns the value of the current text on the button.
+        /// </summary>
         public string ButtonText
         {
             get
@@ -32,7 +38,23 @@ namespace ViewModelExample.ViewModels
                 return buttonText;
             }
         }
-        private void contadorCommand_execute()
+        #endregion
+
+        #region Constructor
+        /// <summary>
+        /// Initializes a new instance of MainVM().
+        /// </summary>
+        public MainVM()
+        {
+            counterCommand = new DelegateCommand(counterCommand_execute);
+        }
+        #endregion
+
+        #region Methods
+        /// <summary>
+        /// Updates the clickCount and notifies the property so the view updates the text within the button.
+        /// </summary>
+        private void counterCommand_execute()
         {
             clickCount++;
             if (clickCount == 1)
@@ -41,16 +63,6 @@ namespace ViewModelExample.ViewModels
                 buttonText = $"Clicked {clickCount} times";
             NotifyPropertyChanged("ButtonText");
         }
-        #endregion
-
-        #region Constructor
-        public MainVM()
-        {
-            contadorCommand = new DelegateCommand(contadorCommand_execute);
-        }
-        #endregion
-
-        #region Methods
         #endregion
 
         #region ViewModel
