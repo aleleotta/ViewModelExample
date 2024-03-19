@@ -13,21 +13,33 @@ namespace ViewModelExample.ViewModels
     {
         #region Attributes
         private DelegateCommand clickButton;
-        private Button button;
-        private int clickCount;
+        private string buttonText;
+        private int clickCount = 0;
         #endregion
 
         #region Properties
-        public DelegateCommand ClickButton { get { return clickButton; }}
-        public Button Button { get { return button; } }
-        public void click_execute()
+        public DelegateCommand ClickButton
+        {
+            get
+            {
+                return clickButton;
+            }
+        }
+        public string ButtonText
+        {
+            get
+            {
+                return buttonText;
+            }
+        }
+        private void click_execute()
         {
             clickCount++;
             if (clickCount == 1)
-                button.Text = $"Clicked {clickCount} time";
+                buttonText = $"Clicked {clickCount} time";
             else
-                button.Text = $"Clicked {clickCount} times";
-
+                buttonText = $"Clicked {clickCount} times";
+            NotifyPropertyChanged("ButtonText");
         }
         #endregion
 
@@ -35,8 +47,8 @@ namespace ViewModelExample.ViewModels
         public MainVM()
         {
             DelegateCommand clickButton = new DelegateCommand(click_execute);
-            button = new Button();
-            button.Text = "Click me!";
+            buttonText = "Click Me!";
+            NotifyPropertyChanged("ButtonText");
         }
         #endregion
 
@@ -45,7 +57,10 @@ namespace ViewModelExample.ViewModels
 
         #region ViewModel
         public event PropertyChangedEventHandler PropertyChanged;
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="propertyName">The name of the changed property</param>
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

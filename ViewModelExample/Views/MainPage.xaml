@@ -10,7 +10,7 @@
             VerticalOptions="Center">
 
             <Button
-                Text="{Binding button}"
+                Text="{Binding ButtonText}"
                 Command="{Binding ClickButton}"
                 HorizontalOptions="Center"/>
 
